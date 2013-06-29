@@ -20,6 +20,7 @@ License:        MIT
 Group:          Platform Development/Python
 Url:            http://code.google.com/p/iniparse/
 Source0:        http://iniparse.googlecode.com/files/iniparse-%{version}.tar.gz
+Source1001: 	python-iniparse.manifest
 BuildRequires:  python-distribute
 BuildRequires:  python-devel
 BuildArch:      noarch
@@ -32,6 +33,7 @@ are preserved when data is updated), and is more convenient to use.
 
 %prep
 %setup -q -n iniparse-%{version}
+cp %{SOURCE1001} .
 chmod 644 html/index.html
 
 %build
@@ -42,6 +44,7 @@ python setup.py install --root %{buildroot} --prefix=%{_prefix}
 rm -rf %{buildroot}%{_datadir}/doc/iniparse-%{version} # Remove unwanted stuff
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 %license LICENSE LICENSE-PSF 
 %{python_sitelib}/*
